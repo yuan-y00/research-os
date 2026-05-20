@@ -1,5 +1,5 @@
 import { ResearchReport } from '../types/report'
-import { formatDate } from '../utils/formatDate'
+import { estimateReadingTimeCN } from '../utils/readingTime'
 import { getTypeLabel } from '../utils/filters'
 
 interface ReportCardProps {
@@ -13,198 +13,107 @@ export function ReportCard({ report, isUnread, onClick }: ReportCardProps) {
     <div
       onClick={onClick}
       style={{
-        position: 'relative',
-        padding: '24px 28px',
-        background: 'rgba(255, 255, 255, 0.72)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid rgba(0,0,0,0.06)',
-        borderRadius: 20,
+        background: 'var(--surface)',
+        border: '1px solid var(--line)',
+        borderRadius: 18,
+        padding: '20px 24px',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
         cursor: 'pointer',
-        transition: 'all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.04)',
+        transition: 'all 0.3s ease',
         display: 'flex',
         flexDirection: 'column',
-        gap: 12,
-        overflow: 'hidden',
+        height: '100%',
+        minHeight: 200,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-4px)'
-        e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)'
+        e.currentTarget.style.transform = 'translateY(-2px)'
+        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.06)'
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'translateY(0)'
-        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.04)'
+        e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,0.03)'
       }}
     >
-      {/* Unread indicator */}
-      {isUnread && (
-        <div style={{ position: 'absolute', top: 16, right: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span
-            style={{
-              display: 'inline-block',
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              background: '#0071e3',
-              boxShadow: '0 0 0 3px rgba(0,113,227,0.2)',
-            }}
-          />
-          <span
-            style={{
-              fontSize: '0.7rem',
-              fontWeight: 600,
-              color: '#0071e3',
-              background: 'rgba(0,113,227,0.08)',
-              padding: '2px 8px',
-              borderRadius: 10,
-              letterSpacing: '0.02em',
-            }}
-          >
-            NEW
-          </span>
-        </div>
-      )}
-
-      {/* Type pill */}
-      <div>
-        <span className={`type-pill ${report.type}`}>{getTypeLabel(report.type)}</span>
+      {/* Top row: type pill + unread dot */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+        <span className="pill">{getTypeLabel(report.type)}</span>
+        {isUnread && <span className="new-badge">未读</span>}
       </div>
 
-      {/* Title */}
+      {/* Title — serif, 18-20px, max 2 lines */}
       <h3
         style={{
-          fontSize: '1.25rem',
-          fontWeight: 700,
-          letterSpacing: '-0.02em',
-          lineHeight: 1.25,
-          color: '#1d1d1f',
-          margin: 0,
+          fontSize: '1.1rem',
+          fontWeight: 600,
+          color: 'var(--text)',
+          fontFamily: 'ui-serif, "Noto Serif SC", "Source Han Serif SC", Georgia, serif',
+          lineHeight: 1.35,
+          margin: '0 0 8px',
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
         }}
       >
         {report.title}
       </h3>
 
-      {/* Subtitle */}
+      {/* Subtitle — 1 line, muted */}
       {report.subtitle && (
         <p
           style={{
-            fontSize: '0.88rem',
-            color: '#6e6e73',
-            lineHeight: 1.4,
-            margin: 0,
+            fontSize: '0.8rem',
+            color: 'var(--muted)',
+            margin: '0 0 6px',
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
           }}
         >
           {report.subtitle}
         </p>
       )}
 
-      {/* Verdict */}
+      {/* Verdict — 1 line, very muted, italic */}
       {report.verdict && (
         <p
           style={{
-            fontSize: '0.84rem',
-            color: '#aeaeb2',
-            lineHeight: 1.4,
-            margin: 0,
+            fontSize: '0.76rem',
+            color: 'var(--faint)',
+            fontStyle: 'italic',
+            margin: '0 0 6px',
             overflow: 'hidden',
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
-            fontStyle: 'italic',
           }}
         >
           {report.verdict}
         </p>
       )}
 
-      {/* KPI mini grid */}
-      {report.kpis && report.kpis.length > 0 && (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${Math.min(report.kpis.length, 4)}, 1fr)`,
-            gap: 8,
-          }}
-        >
-          {report.kpis.slice(0, 4).map((kpi, i) => (
-            <div
-              key={i}
-              style={{
-                padding: '10px 8px',
-                background: 'rgba(0,0,0,0.02)',
-                borderRadius: 10,
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 700,
-                  color: '#1d1d1f',
-                  lineHeight: 1.1,
-                }}
-              >
-                {kpi.value}
-              </div>
-              <div
-                style={{
-                  fontSize: '0.62rem',
-                  color: '#aeaeb2',
-                  marginTop: 2,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.04em',
-                  fontWeight: 500,
-                }}
-              >
-                {kpi.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Spacer — pushes bottom row down for uniform height */}
+      <div style={{ flex: 1 }} />
 
-      {/* Tags */}
-      {report.tags && report.tags.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-          {report.tags.map((tag) => (
-            <span
-              key={tag}
-              style={{
-                fontSize: '0.7rem',
-                color: '#6e6e73',
-                background: 'rgba(0,0,0,0.04)',
-                padding: '2px 10px',
-                borderRadius: 10,
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Footer row */}
+      {/* Bottom row: 2-3 tags + reading time */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          marginTop: 'auto',
-          paddingTop: 8,
-          borderTop: '1px solid rgba(0,0,0,0.04)',
+          marginTop: 12,
+          paddingTop: 10,
+          borderTop: '1px solid var(--line)',
         }}
       >
-        <span style={{ fontSize: '0.75rem', color: '#aeaeb2' }}>
-          {formatDate(report.createdAt)}
-        </span>
-        <span
-          style={{
-            fontSize: '0.84rem',
-            fontWeight: 500,
-            color: '#0071e3',
-          }}
-        >
-          View Research &rarr;
+        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          {report.tags && report.tags.slice(0, 3).map((tag) => (
+            <span key={tag} className="pill" style={{ fontSize: '0.62rem', padding: '1px 8px' }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+        <span className="sans" style={{ fontSize: '0.68rem', color: 'var(--faint)', whiteSpace: 'nowrap' }}>
+          {estimateReadingTimeCN(report.summary + report.verdict + report.originStory?.marketProblem || '')}
         </span>
       </div>
     </div>
