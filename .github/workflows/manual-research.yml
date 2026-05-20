@@ -1,0 +1,45 @@
+name: Manual Research
+
+on:
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: 'Research subject (e.g., DJI, Sam Altman, ...)'
+        required: true
+        type: string
+      report_type:
+        description: 'Report type'
+        required: true
+        type: choice
+        default: 'brand'
+        options:
+          - brand
+          - founder
+          - product
+          - company
+          - crowdfunding
+          - industry_event
+      notes:
+        description: 'Additional research notes / focus areas (optional)'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run manual research
+        run: node scripts/generate-manual-report.mjs --subject="${{ inputs.subject }}" --type="${{ inputs.report_type }}" --notes="${{ inputs.notes }}"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "aeke",
+    "name": "AEKE",
+    "type": "brand",
+    "priority": 5,
+    "keywords": ["AEKE", "AI fitness", "smart home gym", "Kickstarter"],
+    "researchAngles": ["crowdfunding", "hardware", "fitness", "direct-to-consumer"],
+    "lastResearchedAt": "2026-05-15T00:00:00Z"
+  },
+  {
+    "id": "bambu-lab",
+    "name": "Bambu Lab",
+    "type": "brand",
+    "priority": 5,
+    "keywords": ["Bambu Lab", "3D printer", "hardware", "Kickstarter", "maker"],
+    "researchAngles": ["crowdfunding", "hardware", "3d-printing", "consumer-robotics"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "dji",
+    "name": "DJI",
+    "type": "brand",
+    "priority": 5,
+    "keywords": ["DJI", "drone", "hardware", "consumer robotics"],
+    "researchAngles": ["hardware", "drones", "consumer-robotics", "global-brand"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "anker",
+    "name": "Anker",
+    "type": "brand",
+    "priority": 4,
+    "keywords": ["Anker", "charging", "consumer electronics", "e-commerce"],
+    "researchAngles": ["brand", "e-commerce", "direct-to-consumer", "hardware"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "oura",
+    "name": "Oura",
+    "type": "brand",
+    "priority": 4,
+    "keywords": ["Oura", "wearable", "health", "sleep tracking", "subscription"],
+    "researchAngles": ["wearable", "health-tech", "subscription-model", "hardware"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "whoop",
+    "name": "Whoop",
+    "type": "brand",
+    "priority": 4,
+    "keywords": ["Whoop", "wearable", "fitness", "athlete", "subscription"],
+    "researchAngles": ["wearable", "fitness", "subscription-model", "athlete-marketing"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "peloton",
+    "name": "Peloton",
+    "type": "brand",
+    "priority": 4,
+    "keywords": ["Peloton", "connected fitness", "subscription", "hardware"],
+    "researchAngles": ["fitness", "subscription-model", "hardware", "content"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "sam-altman",
+    "name": "Sam Altman",
+    "type": "founder",
+    "priority": 5,
+    "keywords": ["Sam Altman", "OpenAI", "AI", "startup", "YC"],
+    "researchAngles": ["founder", "AI", "vc", "startup-ecosystem"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "jensen-huang",
+    "name": "Jensen Huang",
+    "type": "founder",
+    "priority": 5,
+    "keywords": ["Jensen Huang", "NVIDIA", "GPU", "AI", "semiconductor"],
+    "researchAngles": ["founder", "AI", "semiconductor", "enterprise"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "kickstarter-fitness",
+    "name": "Kickstarter fitness products",
+    "type": "industry_event",
+    "priority": 3,
+    "keywords": ["Kickstarter", "fitness", "crowdfunding", "hardware"],
+    "researchAngles": ["crowdfunding", "fitness", "hardware", "trend"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "smart-boxing",
+    "name": "Smart boxing bag",
+    "type": "product",
+    "priority": 3,
+    "keywords": ["smart boxing", "fitness tech", "AI coaching"],
+    "researchAngles": ["hardware", "fitness", "AI", "new-category"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "ai-hardware",
+    "name": "AI hardware",
+    "type": "industry_event",
+    "priority": 4,
+    "keywords": ["AI", "hardware", "consumer", "trend"],
+    "researchAngles": ["AI", "hardware", "consumer-electronics", "trend"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "humanoid-robotics",
+    "name": "Humanoid robotics",
+    "type": "industry_event",
+    "priority": 4,
+    "keywords": ["humanoid", "robot", "AI", "automation"],
+    "researchAngles": ["robotics", "AI", "hardware", "trend"],
+    "lastResearchedAt": null
+  },
+  {
+    "id": "consumer-robotics",
+    "name": "Consumer robotics",
+    "type": "industry_event",
+    "priority": 4,
+    "keywords": ["consumer robotics", "robot vacuum", "lawn mower", "home robot"],
+    "researchAngles": ["robotics", "consumer-electronics", "hardware", "trend"],
+    "lastResearchedAt": null
+  }
+]
