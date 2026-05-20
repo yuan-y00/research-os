@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ResearchReport, WatchlistItem, DailyState } from './types/report'
 import { HomePage } from './pages/HomePage'
-import { ReportPage } from './pages/ReportPage'
+import { ReportPageV2 } from './pages/ReportPageV2'
 import { SignalsPage } from './pages/SignalsPage'
 import { WatchlistPage } from './pages/WatchlistPage'
 
@@ -75,7 +75,7 @@ export default function App() {
           />
         )}
         {page === 'report' && selectedReport && (
-          <ReportPage
+          <ReportPageV2
             report={selectedReport}
             onBack={() => { setPage('home'); setSelectedReportId(null) }}
           />
